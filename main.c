@@ -14,7 +14,7 @@ long int Det(int N,int A[][N]) 	//Input: square matrix and its dimension
   if (N==2)			
     return A[0][0]*A[1][1] - A[1][0]*A[0][1];
   
-  //Submatrix P formed by removing the ith row and the jth column of matrix B
+  //Submatrix P formed by removing the 0th row and the ith column of matrix B
   int P[N-1][N-1];
 
   for (i=0;i<N;i++) {
