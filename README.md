@@ -14,4 +14,4 @@ Goal:
 Final target complexity is O(~n^2.374), which is the current best known complexity in theory for galactic algorithms.
 
 
-UPDATE: After implementing lower and upper triangular arrays, the algorithm is able to perform a maxmum of n=~25 before crashing. Further research into the topic is needed
+UPDATE: After implementing lower and upper triangular arrays, the algorithm is able to perform a maximum of n=~25 before crashing. Further research into the topic is needed
