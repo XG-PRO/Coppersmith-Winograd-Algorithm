@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #include <time.h>
 
 //Recursive function for calculating the determinant of an NxN square matrix
@@ -52,7 +51,7 @@ void *createArray2D(int M, int N) {
 }
 
 
-//Auxiliary function for assigning random values in a 2Darray, forming a lower triangular matrix. Range: [1,10]
+//Auxiliary function for assigning random values in a 2D array, forming a lower triangular matrix. Range: [1,10]
 void *randomArrLower(int M,int N) {
     int (*P)[N],i,j;
 
@@ -87,12 +86,11 @@ void printArray(int *A,int M,int N) {
 
 int main() {
   int N;
-  int i,j;
   char mode;
 
   srand(time(NULL));
 
-  printf("Give size of A:NxN -> ");				//Decleration of square matrice's size
+  printf("Give size of A:NxN -> ");				//Declaration of square matrix's size
   scanf("%d",&N);
   while((mode=getchar())!='\n' && mode!=EOF);
 
@@ -102,7 +100,6 @@ int main() {
   }
 
   int (*A)[N];
-  A = malloc(sizeof(int[N][N]));
 
   printf("\nSelect array creation method\n");
   printf("R for random, M for manual, other for exit: ");	//Array creation method (manual/random numbers)
@@ -110,7 +107,7 @@ int main() {
 
   if (mode == 'M' || mode == 'm')
     A = createArray2D(N, N);
-  else if (mode =='R' || mode == 'r')
+  else if (mode == 'R' || mode == 'r')
     A = randomArrLower(N, N);
   else
     exit(2);
