@@ -14,4 +14,4 @@ add_executable(Coppersmith_Winograd_Algorithm
         .idea/workspace.xml
         LICENSE
         main.c
-        README.md)
+        README.md "Determinant v2.c")
