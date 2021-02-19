@@ -2,12 +2,12 @@
 Trying to create a C interpretation for the Coppersmith-Winograd Algorithm, regarding NxN arrays. 
 
 
-Progress: 
-Current prototype rounds are of O(n!) complexity, able to calculate a max of n=18 arrays before crashing.
+First version:
+Initial prototype rounds were of O(n!) complexity, able to calculate a max of n=18 arrays before crashing.
 
 
-Target:
-Current complexity target is O(~n^3), after implementing LU decomposition
+Current Prototype:
+Current complexity is O(~n^3), after implementing LU decomposition.
 
 
 Goal:

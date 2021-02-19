@@ -36,6 +36,7 @@ void LU_Decomposition(int n, int a[][n],float L[][n], float U[][n])
     }
 }
 
+
 //Auxiliary function for creating a 2D array manually.
 void *createArray2D(int M, int N) {
     int (*A)[N],i,j;

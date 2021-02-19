@@ -5,9 +5,11 @@
 double DetTr(int ,float (*)[]);
 void LU_Decomposition(int , int (*)[],float (*)[], float (*)[]);
 void *createArray2D(int , int );
-void *randomArrLower(int ,int );
+void *randomArrLower(int ,int );        //Obsolete function, used at early stages for experimentation.
 void *randomArr(int , int );
 void printArray(int ,int ,int (*)[]);
+
+
 
 //Main Program
 int main() {
@@ -44,7 +46,7 @@ int main() {
     LU_Decomposition(N,A,L,U);                  //Formation of lower and upper triangular matrices
 
     /* We will use the property det(LxU) = det(L)*det(U) to calculate the determinant of the initial matrix.
-     * It is proven that the determinant of a triangular square matrix (either upper or lower) is equal to
+     * It is proven that the determinant of a triangular matrix (either upper or lower) is equal to
      * the product of its diagonal elements, or more mathematically:
      *
      * det(M) = m11*m22*m33*...*mNN
