@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/XG-PRO/Desktop/C PROJECTS/Coppersmith-Winograd-Algorithm/Determinant v2.c
+stdio.h
+-
+stdlib.h
+-
+
+C:/Users/XG-PRO/Desktop/C PROJECTS/Coppersmith-Winograd-Algorithm/main.c
+stdio.h
+-
+stdlib.h
+-
+time.h
+-
+
