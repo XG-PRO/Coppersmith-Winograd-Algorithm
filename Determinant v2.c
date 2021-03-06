@@ -13,7 +13,6 @@ double DetTr(int N,float Tr[][N]) {
 void LU_Decomposition(int n, int a[][n],float L[][n], float U[][n])
 {
     int i,j,k;
-
     for(j=0; j<n; j++) {
         for(i=0; i<n; i++) {
             if(i<=j) {
@@ -40,7 +39,6 @@ void LU_Decomposition(int n, int a[][n],float L[][n], float U[][n])
 //Auxiliary function for creating a 2D array manually.
 void *createArray2D(int M, int N) {
     int (*A)[N],i,j;
-
     A = malloc(sizeof(int[M][N]));
     for (i=0;i<M;i++)
         for (j=0;j<N;j++) {
@@ -53,7 +51,6 @@ void *createArray2D(int M, int N) {
 //Auxiliary function for assigning random values in a 2D array, forming a lower triangular matrix. Range: [1,10]
 void *randomArrLower(int M,int N) {
     int (*P)[N],i,j;
-
     P = calloc(M*N,sizeof(int));
     for (i=0;i<M;i++)
         for (j=0;j<i+1;j++)
@@ -64,7 +61,6 @@ void *randomArrLower(int M,int N) {
 //Auxiliary function for assigning random values in a 2D array. Range: [1,10]
 void *randomArr(int M, int N) {
     int (*P)[N],i,j;
-
     P = malloc(sizeof(int[M][N]));
     for (i=0;i<M;i++)
         for (j=0;j<N;j++)

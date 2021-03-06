@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/axaio/CLionProjects/Coppersmith-Winograd-Algorithm/Determinant v2.c
+stdio.h
+-
+stdlib.h
+-
+

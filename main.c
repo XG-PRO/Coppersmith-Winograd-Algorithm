@@ -10,7 +10,6 @@ void *randomArr(int , int );
 void printArray(int ,int ,int (*)[]);
 
 
-
 //Main Program
 int main() {
     int N;
