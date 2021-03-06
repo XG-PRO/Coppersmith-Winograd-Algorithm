@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-double DetTr(int ,float (*)[]);
-void LU_Decomposition(int , int (*)[],float (*)[], float (*)[]);
+double DetTr(int ,double (*)[]);
+void LU_Decomposition(int , int (*)[],double (*)[], double (*)[]);
 void *createArray2D(int , int );
 void *randomArrLower(int ,int );        //Obsolete function, used at early stages for experimentation.
 void *randomArr(int , int );
@@ -39,42 +39,52 @@ int main() {
     else
         exit(2);
 
-    float (*L)[N],(*U)[N];
-    L = malloc(N*N * sizeof(float));
-    U = malloc(N*N * sizeof(float));
-    LU_Decomposition(N,A,L,U);                  //Formation of lower and upper triangular matrices
+    clock_t start, end;
+    double cpu_time_used;
 
-    /* We will use the property det(LxU) = det(L)*det(U) to calculate the determinant of the initial matrix.
-     * It is proven that the determinant of a triangular matrix (either upper or lower) is equal to
-     * the product of its diagonal elements, or more mathematically:
-     *
-     * det(M) = m11*m22*m33*...*mNN
-     * where M:NxN a triangular matrix
-     *
-     * In this case: det(A) = det(L) * det(U) = l11*l22*...*lNN * u11*u22*...*uNN
-     */
+    start = clock();
 
-    /* According to PA = LU decomposition, the diagonal elements of the lower triangular matrix will be 1.
-     * This way the lower triangular matrix is not necessary because:
-     * det(A) = det(L)*det(U) = 1*det(U) = det(U)
-     */
 
-    free(L);
 
-    //Printing matrix A:NxN.
-    //Conditions used for aesthetic purposes; Matrix shall not exceed screen size.
-    if (N < 40) {
-        printf("\nMatrix(A):\n");
-        printArray(N, N, A);
-    }
+    double (*L)[N],(*U)[N];
+        L = malloc(N*N * sizeof(double));
+        U = malloc(N*N * sizeof(double));
+        LU_Decomposition(N,A,L,U);                  //Formation of lower and upper triangular matrices
 
-    //printf("\nMatrix(U):\n");
-    //printArrayFloat(N,N,U);
+        /* We will use the property det(LxU) = det(L)*det(U) to calculate the determinant of the initial matrix.
+         * It is proven that the determinant of a triangular matrix (either upper or lower) is equal to
+         * the product of its diagonal elements, or more mathematically:
+         *
+         * det(M) = m11*m22*m33*...*mNN
+         * where M:NxN a triangular matrix
+         *
+         * In this case: det(A) = det(L) * det(U) = l11*l22*...*lNN * u11*u22*...*uNN
+         */
 
-    double detU;
-    detU = DetTr(N,U);
+        /* According to PA = LU decomposition, the diagonal elements of the lower triangular matrix will be 1.
+         * This way the lower triangular matrix is not necessary because:
+         * det(A) = det(L)*det(U) = 1*det(U) = det(U)
+         */
 
+        free(L);
+
+        //Printing matrix A:NxN.
+        //Conditions used for aesthetic purposes; Matrix shall not exceed screen size.
+
+            //printf("\nMatrix(A):\n");
+            //printArray(N, N, A);
+
+
+        //printf("\nMatrix(U):\n");
+        //printArrayFloat(N,N,U);
+
+        double detU;
+        detU = DetTr(N,U);
+
+    end = clock();
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
     printf("\n|A| = %.0lf\n",detU);				//Determinant of matrix
+    printf("%f",cpu_time_used);
 
     return 0;
 }

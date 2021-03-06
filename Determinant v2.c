@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 //Function for calculating the determinant of a square triangular matrix
-double DetTr(int N,float Tr[][N]) {
+double DetTr(int N,double Tr[][N]) {
     double prod = 1;
     for (int i=0;i<N;i++)
         prod *= Tr[i][i];
@@ -10,13 +10,13 @@ double DetTr(int N,float Tr[][N]) {
 }
 
 //Function implementing PA = LU decomposition for the given Matrix
-void LU_Decomposition(int n, int a[][n],float L[][n], float U[][n])
+void LU_Decomposition(int n, int a[][n],double L[][n], double U[][n])
 {
     int i,j,k;
     for(j=0; j<n; j++) {
         for(i=0; i<n; i++) {
             if(i<=j) {
-                U[i][j]=(float)a[i][j];
+                U[i][j]=(double)a[i][j];
                 for(k=0; k<i; k++)
                     U[i][j]-=L[i][k]*U[k][j];
                 if(i==j)
@@ -25,7 +25,7 @@ void LU_Decomposition(int n, int a[][n],float L[][n], float U[][n])
                     L[i][j]=0;
             }
             else {
-                L[i][j]=(float)a[i][j];
+                L[i][j]=(double)a[i][j];
                 for(k=0; k<=j-1; k++)
                     L[i][j]-=L[i][k]*U[k][j];
                 L[i][j]/=U[j][j];
