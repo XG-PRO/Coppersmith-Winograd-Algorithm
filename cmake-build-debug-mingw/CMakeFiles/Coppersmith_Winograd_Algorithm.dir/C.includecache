@@ -6,9 +6,11 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/axaio/CLionProjects/Coppersmith-Winograd-Algorithm/Determinant v2.c
+C:/Users/axaio/CLionProjects/Coppersmith-Winograd-Algorithm/main.c
 stdio.h
 -
 stdlib.h
+-
+sys/time.h
 -
 

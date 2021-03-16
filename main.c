@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
+#include <sys/time.h>
 
 double DetTr(int ,double (*)[]);
 void LU_Decomposition(int , int (*)[],double (*)[], double (*)[]);
@@ -14,6 +14,7 @@ void printArray(int ,int ,int (*)[]);
 int main() {
     int N;
     char mode;
+    struct timeval  tv1, tv2;
 
     srand(time(NULL));
 
@@ -39,12 +40,7 @@ int main() {
     else
         exit(2);
 
-    clock_t start, end;
-    double cpu_time_used;
-
-    start = clock();
-
-
+    gettimeofday(&tv1, NULL);
 
     double (*L)[N],(*U)[N];
         L = malloc(N*N * sizeof(double));
@@ -70,10 +66,10 @@ int main() {
 
         //Printing matrix A:NxN.
         //Conditions used for aesthetic purposes; Matrix shall not exceed screen size.
-
-            //printf("\nMatrix(A):\n");
-            //printArray(N, N, A);
-
+        //if (N<40) {
+        //    printf("\nMatrix(A):\n");
+        //    printArray(N, N, A);
+        //}
 
         //printf("\nMatrix(U):\n");
         //printArrayFloat(N,N,U);
@@ -81,10 +77,10 @@ int main() {
         double detU;
         detU = DetTr(N,U);
 
-    end = clock();
-    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    gettimeofday(&tv2, NULL);
+
     printf("\n|A| = %.0lf\n",detU);				//Determinant of matrix
-    printf("%f",cpu_time_used);
+    printf ("\nTotal time = %f seconds\n", (double) (tv2.tv_usec - tv1.tv_usec) / 1000000 + (double) (tv2.tv_sec - tv1.tv_sec));
 
     return 0;
 }
