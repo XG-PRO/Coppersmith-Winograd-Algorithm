@@ -36,9 +36,8 @@ int main()
 	else
 	{
 		std::cerr << "File Error!" << std::endl;
-		return EXIT_FAILURE;
+		return 1;
 	}
 
-
-	return EXIT_SUCCESS;
+	return 0;
 }
