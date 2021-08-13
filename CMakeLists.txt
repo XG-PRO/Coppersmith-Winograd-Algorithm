@@ -1,7 +1,7 @@
-cmake_minimum_required(VERSION 3.17)
+cmake_minimum_required(VERSION 3.19)
 project(Coppersmith_Winograd_Algorithm)
 
-set(CMAKE_C_FLAGS "-std=c++20")
+set(CMAKE_CXX_STANDARD 20)
 
 include_directories(.)
 include_directories(.idea)
