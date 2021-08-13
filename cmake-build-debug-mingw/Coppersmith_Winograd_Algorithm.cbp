@@ -99,16 +99,13 @@
 		<Unit filename="C:/Users/axaio/CLionProjects/Coppersmith-Winograd-Algorithm/.idea/workspace.xml">
 			<Option target="Coppersmith_Winograd_Algorithm"/>
 		</Unit>
-		<Unit filename="C:/Users/axaio/CLionProjects/Coppersmith-Winograd-Algorithm/Determinant v2.c">
-			<Option target="Coppersmith_Winograd_Algorithm"/>
-		</Unit>
 		<Unit filename="C:/Users/axaio/CLionProjects/Coppersmith-Winograd-Algorithm/LICENSE">
 			<Option target="Coppersmith_Winograd_Algorithm"/>
 		</Unit>
 		<Unit filename="C:/Users/axaio/CLionProjects/Coppersmith-Winograd-Algorithm/README.md">
 			<Option target="Coppersmith_Winograd_Algorithm"/>
 		</Unit>
-		<Unit filename="C:/Users/axaio/CLionProjects/Coppersmith-Winograd-Algorithm/main.c">
+		<Unit filename="C:/Users/axaio/CLionProjects/Coppersmith-Winograd-Algorithm/main.cpp">
 			<Option target="Coppersmith_Winograd_Algorithm"/>
 		</Unit>
 		<Unit filename="C:/Users/axaio/CLionProjects/Coppersmith-Winograd-Algorithm/CMakeLists.txt">

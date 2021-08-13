@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.17)
 project(Coppersmith_Winograd_Algorithm)
 
-set(CMAKE_C_FLAGS "-std=c99")
+set(CMAKE_C_FLAGS "-std=c++20")
 
 include_directories(.)
 include_directories(.idea)
@@ -13,5 +13,5 @@ add_executable(Coppersmith_Winograd_Algorithm
         .idea/vcs.xml
         .idea/workspace.xml
         LICENSE
-        main.c
-        README.md "Determinant v2.c")
+        main.cpp
+        README.md)

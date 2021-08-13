@@ -6,6 +6,12 @@
 
 #IncludeRegexTransform: 
 
+C:/Users/axaio/CLionProjects/Coppersmith-Winograd-Algorithm/Determinant v2.c
+stdio.h
+-
+stdlib.h
+-
+
 C:/Users/axaio/CLionProjects/Coppersmith-Winograd-Algorithm/main.c
 stdio.h
 -
