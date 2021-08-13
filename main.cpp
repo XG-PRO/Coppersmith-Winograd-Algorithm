@@ -32,6 +32,8 @@ int main()
 
 		std::cout << "\nDet(A): " << std::endl;
 		std::cout << A.determinant() << std::endl;
+
+        ifs.close();
 	}
 	else
 	{
