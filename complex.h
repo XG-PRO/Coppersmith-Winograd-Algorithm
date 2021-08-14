@@ -14,7 +14,8 @@ namespace algebra
 	public:	// Constructors
 		complex();
 		complex(double, double);
-		complex(const complex&);
+		complex(const complex&) = default;
+		~complex() = default;
 
 	public:	// Methods
 		void set_real(double a) { this->a = a; }
@@ -24,7 +25,6 @@ namespace algebra
 		double imaginary() const { return b; }
 
 	public:	// Operators
-		complex& operator = (const complex&);
 		complex& operator += (const complex&);
 		complex& operator -= (const complex&);
 		complex& operator /= (const complex&);
@@ -49,24 +49,13 @@ namespace algebra
 	}
 	// Explicit Constructors
 	complex::complex(double a, double b) {
-		this->a = a;
-		this->b = b;
-	}
-	// Copy Constructors
-	complex::complex(const complex& prototype) {
-		a = prototype.a;
-		b = prototype.b;
+	    this->a = a;
+	    this->b = b;
 	}
 
 
 	// --- OPERATORS ---
 
-	// Assignment operator
-	complex& complex::operator = (const complex& arg) {
-		a = arg.a;
-		b = arg.b;
-		return *this;
-	}
 
 	// Plus-equals operator
 	complex& complex::operator += (const complex& arg) {

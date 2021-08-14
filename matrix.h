@@ -62,8 +62,7 @@ namespace algebra
 	matrix<T>::matrix(dimension_t R, dimension_t C)
 	{
 		// Accepts or discards the given data type
-		static_assert(std::is_integral<T>::value || std::is_floating_point<T>::value, 
-					  "Is not integral or floating point type");
+		static_assert(std::is_trivially_copyable<T>::value, "Matrix's scalars must be trivially copyable");
 
 		if (R < 1 || C < 1) {
 			std::cerr << "Matrix construction error: non-positive number of rows or collumns" << std::endl;
