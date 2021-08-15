@@ -118,11 +118,14 @@ namespace algebra
     complex operator * (const complex& one, const complex& two) {
         complex prod;
 
+        // one = a + bi
         double a = one.real();
         double b = one.imaginary();
+        // two = c + di
         double c = two.real();
         double d = two.imaginary();
 
+        // one * two = (a*c - b*d) + (a*d + b*c)i
         prod.set_real(a * c - b * d);
         prod.set_imaginary(a * d + b * c);
 
@@ -133,11 +136,14 @@ namespace algebra
     complex operator / (const complex& one, const complex& two) {
         complex div;
 
+        // one = a + bi
         double a = one.real();
         double b = one.imaginary();
+        // two = c + di
         double c = two.real();
         double d = two.imaginary();
 
+        // one / two = [ (a*c + b*d) + (b*c - a*d)i ] / (c^2 + d^2)
         div.set_real((a * c + b * d) / (c * c + d * d));
         div.set_imaginary((b * c - a * d) / (c * c + d * d));
 
