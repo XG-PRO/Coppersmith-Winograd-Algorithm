@@ -54,7 +54,7 @@ namespace algebra
     }
     complex::complex(double k) {
         this->a = k;
-        this->b = k;
+        this->b = 0;
     }
 
 
