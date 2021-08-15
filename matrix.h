@@ -66,7 +66,7 @@ namespace algebra
 
 		if (R < 1 || C < 1) {
 			std::cerr << "Matrix construction error: non-positive number of rows or collumns" << std::endl;
-			exit(EXIT_FAILURE);
+			exit(1);
 		}
 		m_matrix = new T[(std::size_t)(R * C)];
 		m_rows = R;
