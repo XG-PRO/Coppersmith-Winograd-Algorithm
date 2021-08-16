@@ -291,7 +291,7 @@ namespace algebra {
 
     public: // Methods
         dimension_t dimension() const { return this->m_rows; }
-        matrix<T> pow(unsigned long long) const;
+        matrix<T> pow(long long) const;
         double determinant() const;
 
     public: // Operators
@@ -325,7 +325,7 @@ namespace algebra {
     // the following algorithm strives for efficient exponentiation
     // with O(log2(exp)) time complexity, where exp is the exponent
     template<typename T>
-    matrix<T> sqr_matrix<T>::pow(unsigned long long exp) const {
+    matrix<T> sqr_matrix<T>::pow(long long exp) const {
         if (exp <= 1) {
             if (exp <= 0)
                 std::cerr << "Error: Exponent of matrix must be greater than zero!" << std::endl;
