@@ -24,13 +24,13 @@ int main()
 	{
 		std::cout << "First Matrix: " << std::endl;
 		ifs >> A;
-		std::cout << A;
+		std::cout << A << std::endl;
 
-		std::cout << "\nSecond Matrix:" << std::endl;
+		std::cout << "Second Matrix:" << std::endl;
 		ifs >> B;
-		std::cout << B;
+		std::cout << B << std::endl;
 
-		std::cout << "\nDet(A): " << std::endl;
+		std::cout << "Det(A): " << std::endl;
 		std::cout << A.determinant() << std::endl;
 
         ifs.close();
