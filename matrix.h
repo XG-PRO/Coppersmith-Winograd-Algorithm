@@ -7,19 +7,36 @@
 #include <type_traits>
 #include <cmath>
 
+
+/*                           MATRIX CLASS
+ *
+ *  An  implementation for  linear  algebra's  matrices, an important
+ *  data structure for the current project.
+ *  The Coppersmith-Winograd  algorithm  will be  used for optimizing
+ *  the multiplication of matrices and the calculation of determinant
+ */
+
 namespace algebra {
-    typedef long long dimension_t;
+    typedef long long dimension_t;  // data type for the rows and columns of
 
     template<class T>
     class matrix
     {
+        /*  Each square matrix itself is a pseudo-2D array instance.
+         *  The scalars are stored in a one-dimensional C-style array.
+         *
+         *  This offers 2 main advantages compared to a double pointer array:
+         *      - slightly higher speed
+         *      - optimal locality
+         */
     protected:    // Class members
-        T *m_matrix;
-        dimension_t m_rows;
-        dimension_t m_collumns;
+        T *m_matrix; // The one-dimensional array for storing the scalars of the matrix
+        dimension_t m_rows;     // Number of rows
+        dimension_t m_columns;  // Number of columns
 
     protected:
-        T *getRow(dimension_t i) const { return m_matrix + (i * m_collumns); }
+        // Will be used for the overloading of the "[]" operator
+        T *getRow(dimension_t i) const { return m_matrix + (i * m_columns); }
 
     public: // Constructors -- Destructor
         matrix() = delete;
@@ -32,12 +49,15 @@ namespace algebra {
         void set(T set_num) { init(set_num); }
         bool canBeMultipliedWith(const matrix<T> &) const;
         dimension_t numOfRows() const { return m_rows; }
-        dimension_t numOfColls() const { return m_collumns; }
+        dimension_t numOfCols() const { return m_columns; }
 
     public: // Operators
         matrix<T> &operator = (const matrix<T> &);
         virtual matrix<T> &operator *= (T);
         virtual matrix<T> &operator /= (T);
+
+        // This  specific definition of the  overloaded "[]" operator
+        // makes the expression M[i][j] possible, where M is a matrix
         T *operator [] (dimension_t i) const { return getRow(i); }
     };
 
@@ -67,16 +87,16 @@ namespace algebra {
         }
         m_matrix = new T[(std::size_t) (R * C)];
         m_rows = R;
-        m_collumns = C;
+        m_columns = C;
     }
 
     template<typename T>
     matrix<T>::matrix(const matrix<T> &prototype) {
         m_rows = prototype.m_rows;
-        m_collumns = prototype.m_collumns;
-        m_matrix = new T[(unsigned int) (m_rows * m_collumns)];
+        m_columns = prototype.m_columns;
+        m_matrix = new T[(unsigned int) (m_rows * m_columns)];
 
-        dimension_t total = m_rows * m_collumns;
+        dimension_t total = m_rows * m_columns;
         for (dimension_t i = 0; i < total; ++i) {
             m_matrix[i] = prototype.m_matrix[i];
         }
@@ -89,10 +109,10 @@ namespace algebra {
 
     // --- METHODS ---
 
-    // Initialises matrice's cells with the given arguement
+    // Initialises matrix's cells with the given argument
     template<typename T>
     void matrix<T>::init(T init_arg) {
-        dimension_t total = m_rows * m_collumns;
+        dimension_t total = m_rows * m_columns;
         for (dimension_t i = 0; i < total; ++i) {
             m_matrix[i] = init_arg;
         }
@@ -101,7 +121,7 @@ namespace algebra {
     // Returns whether the operation (*this) x arg can be performed
     template<typename T>
     bool matrix<T>::canBeMultipliedWith(const matrix<T> &arg) const {
-        return this->numOfColls() == arg.numOfRows();
+        return this->numOfCols() == arg.numOfRows();
     }
 
 
@@ -112,12 +132,12 @@ namespace algebra {
     matrix<T> &matrix<T>::operator = (const matrix<T> &arg) {
         if (this != &arg) {
             m_rows = arg.numOfRows();
-            m_collumns = arg.numOfColls();
+            m_columns = arg.numOfCols();
 
             delete[] m_matrix;
-            m_matrix = new T[(std::size_t) (m_rows * m_collumns)];
+            m_matrix = new T[(std::size_t) (m_rows * m_columns)];
 
-            dimension_t total = m_rows * m_collumns;
+            dimension_t total = m_rows * m_columns;
 
             for (dimension_t i = 0; i < total; ++i) {
                 m_matrix[i] = arg.m_matrix[i];
@@ -129,7 +149,7 @@ namespace algebra {
     // Times-equals operator with number
     template<typename T>
     matrix<T> &matrix<T>::operator *= (T factor) {
-        dimension_t total = m_rows * m_collumns;
+        dimension_t total = m_rows * m_columns;
         for (dimension_t i = 0; i < total; ++i) {
             m_matrix[i] *= factor;
         }
@@ -139,7 +159,7 @@ namespace algebra {
     // Division-equals operator with number
     template<typename T>
     matrix<T> &matrix<T>::operator /= (T factor) {
-        dimension_t total = m_rows * m_collumns;
+        dimension_t total = m_rows * m_columns;
         for (dimension_t i = 0; i < total; ++i) {
             m_matrix[i] /= factor;
         }
@@ -150,14 +170,14 @@ namespace algebra {
     template<typename T>
     matrix<T> operator + (const matrix<T> &one, const matrix<T> &two) {
         if (one.numOfRows() != two.numOfRows() ||
-            one.numOfColls() != two.numOfColls()) {
+                one.numOfCols() != two.numOfCols()) {
             std::cerr << "Error: cannot add matrices with different dimensions" << std::endl;
             return matrix<T>(1, 1);
         }
-        matrix<T> sum(one.numOfRows(), one.numOfColls());
+        matrix<T> sum(one.numOfRows(), one.numOfCols());
 
         for (dimension_t i = 0; i < sum.numOfRows(); ++i) {
-            for (dimension_t j = 0; j < sum.numOfColls(); ++j) {
+            for (dimension_t j = 0; j < sum.numOfCols(); ++j) {
                 sum[i][j] = one[i][j] + two[i][j];
             }
         }
@@ -169,14 +189,14 @@ namespace algebra {
     template<typename T>
     matrix<T> operator - (const matrix<T> &one, const matrix<T> &two) {
         if (one.numOfRows() != two.numOfRows() ||
-            one.numOfColls() != two.numOfColls()) {
+                one.numOfCols() != two.numOfCols()) {
             std::cerr << "Error: cannot subtract matrices with different dimensions" << std::endl;
             return matrix<T>(1, 1);
         }
-        matrix<T> diff(one.numOfRows(), one.numOfColls());
+        matrix<T> diff(one.numOfRows(), one.numOfCols());
 
         for (dimension_t i = 0; i < diff.numOfRows(); ++i) {
-            for (dimension_t j = 0; j < diff.numOfColls(); ++j) {
+            for (dimension_t j = 0; j < diff.numOfCols(); ++j) {
                 diff[i][j] = one[i][j] - two[i][j];
             }
         }
@@ -186,19 +206,19 @@ namespace algebra {
     // Multiplication operator -- two matrices
     template<typename T>
     matrix<T> operator * (const matrix<T> &one, const matrix<T> &two) {
-        if (one.numOfColls() != two.numOfRows()) {
+        if (one.numOfCols() != two.numOfRows()) {
             std::cerr << "Error: cannot multiply matrices\n"
                       << "Collumns and rows of instances do not match"
                       << std::endl;
             return matrix<T>(1, 1);
         }
-        matrix<T> prod(one.numOfRows(), two.numOfColls());
+        matrix<T> prod(one.numOfRows(), two.numOfCols());
 
         prod.init((T) 0);
 
         for (dimension_t i = 0; i < one.numOfRows(); i++) {
-            for (dimension_t j = 0; j < two.numOfColls(); j++) {
-                for (dimension_t k = 0; k < one.numOfColls(); k++) {
+            for (dimension_t j = 0; j < two.numOfCols(); j++) {
+                for (dimension_t k = 0; k < one.numOfCols(); k++) {
                     prod[i][j] += one[i][k] * two[k][j];
                 }
             }
@@ -224,13 +244,13 @@ namespace algebra {
     template<typename T>
     bool operator == (const matrix<T> &one, const matrix<T> &two) {
         if (one.numOfRows() != two.numOfRows() ||
-            two.numOfColls() != two.numOfColls()) {
+                two.numOfCols() != two.numOfCols()) {
             return false;
         }
         bool result = true;
 
         for (dimension_t i = 0; i < one.numOfRows() && result; ++i) {
-            for (dimension_t j = 0; j < one.numOfColls() && result; ++j) {
+            for (dimension_t j = 0; j < one.numOfCols() && result; ++j) {
                 if (one[i][j] != two[i][j]) {
                     result = false;
                 }
@@ -250,7 +270,7 @@ namespace algebra {
     std::ostream &operator << (std::ostream &os, const matrix<T> &arg) {
         for (dimension_t i = 0; i < arg.numOfRows(); ++i) {
             os << "|";
-            for (dimension_t j = 0; j < arg.numOfColls(); ++j) {
+            for (dimension_t j = 0; j < arg.numOfCols(); ++j) {
                 os << std::setw(4) << std::setfill(' ') << arg[i][j] << " ";
             }
             os << "|" << std::endl;
@@ -262,7 +282,7 @@ namespace algebra {
     template<typename T>
     std::istream &operator >> (std::istream &is, const matrix<T> &arg) {
         for (dimension_t i = 0; i < arg.numOfRows(); ++i) {
-            for (dimension_t j = 0; j < arg.numOfColls(); ++j) {
+            for (dimension_t j = 0; j < arg.numOfCols(); ++j) {
                 is >> arg[i][j];
             }
         }
@@ -275,7 +295,7 @@ namespace algebra {
     // ----- SQUARE MATRIX CLASS -----
     // -------------------------------
 
-    // A subclass for square matrices, it has extra special properties such as
+    // A subclass for square matrices, it has extra, special properties such as
     // exponentiation and determinant calculation
     template<class T>
     class sqr_matrix : public matrix<T>
@@ -320,9 +340,10 @@ namespace algebra {
 
     // --- METHODS ---
 
-    // Returns the matrix to the power of the argument,
-    // the following algorithm strives for efficient exponentiation
-    // with O(log2(exp)) time complexity, where exp is the exponent
+    /*  Returns the matrix to the power of the argument,
+     *  the following algorithm strives for efficient exponentiation
+     *  with O(log2(exp)) time complexity, where exp is the exponent
+     */
     template<typename T>
     matrix<T> sqr_matrix<T>::pow(long long exp) const {
         if (exp <= 1) {
@@ -428,12 +449,12 @@ namespace algebra {
     sqr_matrix<T> &sqr_matrix<T>::operator=(const sqr_matrix<T> &arg) {
         if (this != &arg) {
             this->m_rows = arg.dimension();
-            this->m_collumns = arg.dimension();
+            this->m_columns = arg.dimension();
 
             delete[] this->m_matrix;
-            this->m_matrix = new T[(std::size_t) (this->m_rows * this->m_collumns)];
+            this->m_matrix = new T[(std::size_t) (this->m_rows * this->m_columns)];
 
-            dimension_t total = this->m_rows * this->m_collumns;
+            dimension_t total = this->m_rows * this->m_columns;
 
             for (dimension_t i = 0; i < total; ++i) {
                 this->m_matrix[i] = arg.m_matrix[i];
@@ -445,7 +466,7 @@ namespace algebra {
     // Times-equals operator with number
     template<typename T>
     sqr_matrix<T> &sqr_matrix<T>::operator*=(T factor) {
-        dimension_t total = this->m_rows * this->m_collumns;
+        dimension_t total = this->m_rows * this->m_columns;
         for (dimension_t i = 0; i < total; ++i) {
             this->m_matrix[i] *= factor;
         }
@@ -455,7 +476,7 @@ namespace algebra {
     // Division-equals operator with number
     template<typename T>
     sqr_matrix<T> &sqr_matrix<T>::operator/=(T factor) {
-        dimension_t total = this->m_rows * this->m_collumns;
+        dimension_t total = this->m_rows * this->m_columns;
         for (dimension_t i = 0; i < total; ++i) {
             this->m_matrix[i] /= factor;
         }
