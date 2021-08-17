@@ -2,11 +2,13 @@
 #include <fstream>
 #include "algebra.h"
 
-/* TODO: PA = LU decomposition problem
- * During the decomposition of the 5x5 matrix found in matrices.txt
- * the two triangular matrices, U and L, have shown to have an inf value
- * as one of their elements.
- * Head to matrix.h file -- line 396 for more details.
+/*              TODO: PA = LU decomposition problem
+ *  During  the  decomposition  of  the  5x5 matrix found in matrices.txt
+ *  the two triangular matrices, U and L, have shown to have an inf value
+ *  as one of their elements.
+ *
+ *  Head to matrix.h file -- line 405 for more details.
+ *  DO NOT EDIT THE MAIN FUNCTION BEFORE DOING SO
  */
 
 int main()

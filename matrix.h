@@ -416,6 +416,11 @@ namespace algebra {
                     for (dimension_t k = 0; k <= j - 1; k++) {
                         L[i][j] -= L[i][k] * U[k][j];
                     }
+                    /*  The following code causes a division-by-zero issue, the results are:
+                     *      - Some scalars are assigned NaN values
+                     *      - Wrong calculation of determinant
+                     *  Run the code to see for yourself
+                     */
                     L[i][j] /= U[j][j];
                     U[i][j] = 0;
                 }
