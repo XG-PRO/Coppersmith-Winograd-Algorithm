@@ -2,7 +2,7 @@
 #define VECTOR_2D_H
 
 #ifndef PI
-#	define PI 3.14159265358979323846
+#	define PI 3.14159265358979323846L
 #endif
 
 #include <iostream>
