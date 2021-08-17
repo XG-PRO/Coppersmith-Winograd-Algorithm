@@ -78,7 +78,14 @@ namespace algebra {
     // Constructs a matrix with RxC dimension
     template<typename T>
     matrix<T>::matrix(dimension_t R, dimension_t C) {
-        // Accepts or discards the given data type
+        /*  Accepts or discards the given data type, only trivially copyable
+         *  data types are accepted as scalars.
+         *
+         *  algebra::complex is an accepted data types, thus matrices with
+         *  complex scalars can be created
+         *
+         *  head to complex.h for more info on the library's complex numbers.
+         */
         static_assert(std::is_trivially_copyable<T>::value, "Matrix's scalars must be trivially copyable");
 
         if (R < 1 || C < 1) {

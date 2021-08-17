@@ -3,6 +3,13 @@
 
 #include <iostream>
 
+/*                     COMPLEX NUMBERS
+ *
+ *  The following code is an implementation of a trivially
+ *  copyable  class for complex numbers. It is accepted as
+ *  template parameter for the algebra::matrix class.
+ */
+
 namespace algebra
 {
     class complex {
