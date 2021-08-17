@@ -9,6 +9,8 @@
  *  of this license document, but changing it is not allowed.
  */
 
+// Some compilers have problems with the M_PI macro definition of <cmath>,
+// Additional definition is provided, just in case.
 #ifndef PI
 #	define PI 3.14159265358979323846L
 #endif
