@@ -417,7 +417,10 @@ namespace algebra {
                     for (dimension_t k = 0; k < i; k++) {
                         U[i][j] -= L[i][k] * U[k][j];
                     }
-                    L[i][j] = (i == j ? 1 : 0);
+                    if (i == j)
+                        L[i][j] = 1;
+                    else
+                        L[i][j] = 0;
                 } else {
                     L[i][j] = (double) (*this)[i][j];
                     for (dimension_t k = 0; k <= j - 1; k++) {
