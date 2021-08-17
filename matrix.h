@@ -7,7 +7,6 @@
 #include <type_traits>
 #include <cmath>
 
-
 namespace algebra {
     typedef long long dimension_t;
 
