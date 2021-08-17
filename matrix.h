@@ -30,7 +30,7 @@ namespace algebra {
          *      - optimal locality
          */
     protected:    // Class members
-        T *m_matrix; // The one-dimensional array for storing the scalars of the matrix
+        T *m_matrix;            // The one-dimensional array for storing the scalars of the matrix
         dimension_t m_rows;     // Number of rows
         dimension_t m_columns;  // Number of columns
 
