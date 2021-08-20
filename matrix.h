@@ -298,12 +298,13 @@ namespace algebra {
 
 
 
-    // -------------------------------
-    // ----- SQUARE MATRIX CLASS -----
-    // -------------------------------
+    /*              SQUARE MATRIX CLASS
+     *
+     *  A subclass for square matrices, it has extra,
+     *  special properties such as exponentiation and
+     *  determinant calculation
+     */
 
-    // A subclass for square matrices, it has extra, special properties such as
-    // exponentiation and determinant calculation
     template<class T>
     class sqr_matrix : public matrix<T>
     {
