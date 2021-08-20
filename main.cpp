@@ -11,6 +11,7 @@
  *  DO NOT EDIT THE MAIN FUNCTION BEFORE DOING SO
  */
 
+
 /*                  UPDATE -- 20/08/2021:
  *  New  implementation  for  row  echelon form is on the way,
  *  this will  make the  determinant  calculation more  robust
