@@ -9,12 +9,6 @@
  *  of this license document, but changing it is not allowed.
  */
 
-// Some compilers have problems with the M_PI macro definition of <cmath>,
-// Additional definition is provided, just in case.
-#ifndef PI
-#	define PI 3.14159265358979323846L
-#endif
-
 #include "matrix.h"     // Linear algebra's matrices
 #include "vector_2d.h"  // 2-Dimensional vectors
 #include "vector_3d.h"  // 3-Dimensional vectors -- vector_2D derived class

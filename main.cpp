@@ -11,6 +11,13 @@
  *  DO NOT EDIT THE MAIN FUNCTION BEFORE DOING SO
  */
 
+/*                  UPDATE -- 20/08/2021:
+ *  New  implementation  for  row  echelon form is on the way,
+ *  this will  make the  determinant  calculation more  robust
+ *  for scalars in all number sets, like negatives and complex
+ *  numbers.
+ */
+
 int main()
 {
     // Constructs two square matrices with 5x5 and 3x3 dimensions, respectively.

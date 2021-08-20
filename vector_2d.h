@@ -1,6 +1,8 @@
 #ifndef VECTOR_2D_H
 #define VECTOR_2D_H
 
+// Some compilers have problems with the M_PI macro definition of <cmath>,
+// Additional definition is provided, just in case.
 #ifndef PI
 #	define PI 3.14159265358979323846L
 #endif

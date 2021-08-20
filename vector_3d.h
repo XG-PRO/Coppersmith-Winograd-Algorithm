@@ -167,4 +167,6 @@ namespace algebra
 	}
 }
 
+#undef PI
+
 #endif // VECTOR_3D_H

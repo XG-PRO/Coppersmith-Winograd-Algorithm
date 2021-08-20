@@ -446,9 +446,6 @@ namespace algebra {
 
         this->decomposeLU(L, U);
 
-        std::cout << "L = \n" << L << std::endl;
-        std::cout << "U = \n" << U << std::endl;
-
         double detU = 1;
 
         for (dimension_t i = 0; i < this->dimension(); ++i) {
