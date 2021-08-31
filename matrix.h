@@ -89,7 +89,7 @@ namespace algebra {
         static_assert(std::is_trivially_copyable<T>::value, "Matrix's scalars must be trivially copyable");
 
         if (R < 1 || C < 1) {
-            std::cerr << "Matrix construction error: non-positive number of rows or collumns" << std::endl;
+            std::cerr << "Matrix construction error: non-positive number of rows or columns" << std::endl;
             exit(EXIT_FAILURE);
         }
         m_matrix = new T[(std::size_t) (R * C)];
@@ -215,7 +215,7 @@ namespace algebra {
     matrix<T> operator * (const matrix<T> &one, const matrix<T> &two) {
         if (one.numOfCols() != two.numOfRows()) {
             std::cerr << "Error: cannot multiply matrices\n"
-                      << "Collumns and rows of instances do not match"
+                      << "Columns and rows of instances do not match"
                       << std::endl;
             return matrix<T>(1, 1);
         }
@@ -313,7 +313,7 @@ namespace algebra {
 
     public: // Constructors
         sqr_matrix() = delete;
-        sqr_matrix(dimension_t N);
+        explicit sqr_matrix(dimension_t N, bool UNARY = false);
         sqr_matrix(const sqr_matrix<T> &);
 
     public: // Methods
@@ -339,7 +339,13 @@ namespace algebra {
 
     // Explicit Constructor
     template<typename T>
-    sqr_matrix<T>::sqr_matrix(dimension_t N) : matrix<T>(N, N) {}
+    sqr_matrix<T>::sqr_matrix(dimension_t N, bool UNARY) : matrix<T>(N, N) {
+        if (UNARY) {
+            this->init((T)0);
+            for (dimension_t i = 0; i < N; ++i)
+                (*this)[i][i] = (T)1;
+        }
+    }
 
     // Copy Constructor
     template<typename T>
@@ -535,7 +541,7 @@ namespace algebra {
     sqr_matrix<T> operator * (const sqr_matrix<T> &one, const sqr_matrix<T> &two) {
         if (one.dimension() != two.dimension()) {
             std::cerr << "Error: cannot multiply matrices\n"
-                      << "Collumns and rows of instances do not match"
+                      << "Columns and rows of instances do not match"
                       << std::endl;
             return sqr_matrix<T>(1);
         }
@@ -567,5 +573,8 @@ namespace algebra {
     }
 
 }
+
+#define I(T, n) algebra::sqr_matrix<T>(n, true)
+
 
 #endif // MATRIX_H
