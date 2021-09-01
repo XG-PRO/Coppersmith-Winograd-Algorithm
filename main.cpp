@@ -2,6 +2,7 @@
 #include <fstream>
 #include "algebra.h"
 
+
 /*              TODO: PA = LU decomposition problem
  *  During  the  decomposition  of  the  5x5 matrix found in matrices.txt
  *  the two triangular matrices, U and L, have shown to have an inf value
@@ -12,11 +13,9 @@
  */
 
 
-/*                  UPDATE -- 20/08/2021:
- *  New  implementation  for  row  echelon form is on the way,
- *  this will  make the  determinant  calculation more  robust
- *  for scalars in all number sets, like negatives and complex
- *  numbers.
+/*                  UPDATE -- 1/09/2021:
+ *  Implemented unary matrix, head to sqr_matrix explicit
+ *  constructor and matrix.h file -- line 578 to learn more
  */
 
 int main()
@@ -48,9 +47,9 @@ int main()
 	else
 	{
 		std::cerr << "File Error!" << std::endl;
-		return 1;
+		return EXIT_FAILURE;
 	}
 
 
-	return 0;
+	return EXIT_SUCCESS;
 }

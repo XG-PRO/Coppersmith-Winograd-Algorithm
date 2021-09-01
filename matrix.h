@@ -340,6 +340,7 @@ namespace algebra {
     // Explicit Constructor
     template<typename T>
     sqr_matrix<T>::sqr_matrix(dimension_t N, bool UNARY) : matrix<T>(N, N) {
+        // If UNARY == true, a unary matrix (In) of dimension N is returned. Default value of UNARY evaluates to false
         if (UNARY) {
             this->init((T)0);
             for (dimension_t i = 0; i < N; ++i)
@@ -574,7 +575,7 @@ namespace algebra {
 
 }
 
-#define I(T, n) algebra::sqr_matrix<T>(n, true)
+#define I(n, T) algebra::sqr_matrix<T>(n, true)
 
 
 #endif // MATRIX_H
