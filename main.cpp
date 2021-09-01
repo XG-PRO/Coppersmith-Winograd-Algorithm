@@ -14,7 +14,7 @@
 
 
 /*                  UPDATE -- 1/09/2021:
- *  Implemented unary matrix, head to sqr_matrix explicit
+ *  Implemented  unary  matrix, head to sqr_matrix explicit
  *  constructor and matrix.h file -- line 578 to learn more
  */
 
