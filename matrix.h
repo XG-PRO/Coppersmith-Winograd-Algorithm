@@ -318,7 +318,7 @@ namespace algebra {
 
     public: // Methods
         dimension_t dimension() const { return this->m_rows; }
-        matrix<T> pow(long long) const;
+        sqr_matrix<T> pow(long long) const;
         double determinant() const;
 
     public: // Operators
@@ -360,7 +360,7 @@ namespace algebra {
      *  with O(log2(exp)) time complexity, where exp is the exponent
      */
     template <typename T>
-    matrix<T> sqr_matrix<T>::pow(long long exp) const {
+    sqr_matrix<T> sqr_matrix<T>::pow(long long exp) const {
         if (exp <= 1) {
             if (exp <= 0)
                 std::cerr << "Error: Exponent of matrix must be greater than zero!" << std::endl;
@@ -374,10 +374,10 @@ namespace algebra {
         }
 
         std::size_t len = (int) log2(exp) + 2;
-        auto **p = new matrix<T> *[len];
+        auto **p = new sqr_matrix<T> *[len];
 
         for (std::size_t k = 0; k < len; ++k) {
-            p[k] = new matrix<T>(this->dimension(), this->dimension());
+            p[k] = new sqr_matrix<T>(this->dimension());
         }
 
         unsigned int i = 0;
@@ -405,7 +405,7 @@ namespace algebra {
             prev_exp = prev_exp >> 1;
         }
 
-        matrix<T> result = *(p[i]);
+        sqr_matrix<T> result = *(p[i]);
 
         for (std::size_t k = 0; k < len; ++k) {
             delete p[k];
