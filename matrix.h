@@ -19,7 +19,7 @@
 namespace algebra {
     typedef long long dimension_t;  // data type for the rows and columns of
 
-    template<class T>
+    template <class T>
     class matrix
     {
         /*  Each square matrix itself is a pseudo-2D array instance.
@@ -62,21 +62,21 @@ namespace algebra {
     };
 
     // Operators
-    template<typename T> matrix<T> operator + (const matrix<T> &, const matrix<T> &);
-    template<typename T> matrix<T> operator - (const matrix<T> &, const matrix<T> &);
-    template<typename T> matrix<T> operator * (const matrix<T> &, const matrix<T> &);
-    template<typename T> matrix<T> operator * (T, const matrix<T> &);
-    template<typename T> matrix<T> operator * (const matrix<T> &, T);
-    template<typename T> bool operator != (const matrix<T> &, const matrix<T> &);
-    template<typename T> bool operator == (const matrix<T> &, const matrix<T> &);
-    template<typename T> std::ostream &operator << (std::ostream &, const matrix<T> &);
-    template<typename T> std::istream &operator >> (std::istream &, const matrix<T> &);
+    template <typename T> matrix<T> operator + (const matrix<T> &, const matrix<T> &);
+    template <typename T> matrix<T> operator - (const matrix<T> &, const matrix<T> &);
+    template <typename T> matrix<T> operator * (const matrix<T> &, const matrix<T> &);
+    template <typename T> matrix<T> operator * (T, const matrix<T> &);
+    template <typename T> matrix<T> operator * (const matrix<T> &, T);
+    template <typename T> bool operator != (const matrix<T> &, const matrix<T> &);
+    template <typename T> bool operator == (const matrix<T> &, const matrix<T> &);
+    template <typename T> std::ostream &operator << (std::ostream &, const matrix<T> &);
+    template <typename T> std::istream &operator >> (std::istream &, const matrix<T> &);
 
 
     // --- BLUEPRINTS ---
 
     // Constructs a matrix with RxC dimension
-    template<typename T>
+    template <typename T>
     matrix<T>::matrix(dimension_t R, dimension_t C) {
         /*  Accepts or discards the given data type, only trivially copyable
          *  data types are accepted as scalars.
@@ -97,7 +97,7 @@ namespace algebra {
         m_columns = C;
     }
 
-    template<typename T>
+    template <typename T>
     matrix<T>::matrix(const matrix<T> &prototype) {
         m_rows = prototype.m_rows;
         m_columns = prototype.m_columns;
@@ -109,7 +109,7 @@ namespace algebra {
         }
     }
 
-    template<typename T>
+    template <typename T>
     matrix<T>::~matrix() {
         delete[] this->m_matrix;
     }
@@ -117,7 +117,7 @@ namespace algebra {
     // --- METHODS ---
 
     // Initialises matrix's cells with the given argument
-    template<typename T>
+    template <typename T>
     void matrix<T>::init(T init_arg) {
         dimension_t total = m_rows * m_columns;
         for (dimension_t i = 0; i < total; ++i) {
@@ -126,7 +126,7 @@ namespace algebra {
     }
 
     // Returns whether the operation (*this) x arg can be performed
-    template<typename T>
+    template <typename T>
     bool matrix<T>::canBeMultipliedWith(const matrix<T> &arg) const {
         return this->numOfCols() == arg.numOfRows();
     }
@@ -135,7 +135,7 @@ namespace algebra {
     // --- OPERATORS ---
 
     // Assignment operator
-    template<typename T>
+    template <typename T>
     matrix<T> &matrix<T>::operator = (const matrix<T> &arg) {
         if (this != &arg) {
             m_rows = arg.numOfRows();
@@ -154,7 +154,7 @@ namespace algebra {
     }
 
     // Times-equals operator with number
-    template<typename T>
+    template <typename T>
     matrix<T> &matrix<T>::operator *= (T factor) {
         dimension_t total = m_rows * m_columns;
         for (dimension_t i = 0; i < total; ++i) {
@@ -164,7 +164,7 @@ namespace algebra {
     }
 
     // Division-equals operator with number
-    template<typename T>
+    template <typename T>
     matrix<T> &matrix<T>::operator /= (T factor) {
         dimension_t total = m_rows * m_columns;
         for (dimension_t i = 0; i < total; ++i) {
@@ -174,7 +174,7 @@ namespace algebra {
     }
 
     // Addition operator -- two matrices
-    template<typename T>
+    template <typename T>
     matrix<T> operator + (const matrix<T> &one, const matrix<T> &two) {
         if (one.numOfRows() != two.numOfRows() ||
                 one.numOfCols() != two.numOfCols()) {
@@ -193,7 +193,7 @@ namespace algebra {
 
 
     // Subtraction operator -- two matrices
-    template<typename T>
+    template <typename T>
     matrix<T> operator - (const matrix<T> &one, const matrix<T> &two) {
         if (one.numOfRows() != two.numOfRows() ||
                 one.numOfCols() != two.numOfCols()) {
@@ -211,7 +211,7 @@ namespace algebra {
     }
 
     // Multiplication operator -- two matrices
-    template<typename T>
+    template <typename T>
     matrix<T> operator * (const matrix<T> &one, const matrix<T> &two) {
         if (one.numOfCols() != two.numOfRows()) {
             std::cerr << "Error: cannot multiply matrices\n"
@@ -235,20 +235,20 @@ namespace algebra {
 
 
     // Multiplication operator with number
-    template<typename T>
+    template <typename T>
     matrix<T> operator * (T factor, const matrix<T> &arg) {
         matrix<T> prod(arg);
         prod *= factor;
         return prod;
     }
 
-    template<typename T>
+    template <typename T>
     matrix<T> operator * (const matrix<T> &arg, T factor) {
         return factor * arg;
     }
 
     // Equal-to operator
-    template<typename T>
+    template <typename T>
     bool operator == (const matrix<T> &one, const matrix<T> &two) {
         if (one.numOfRows() != two.numOfRows() ||
                 two.numOfCols() != two.numOfCols()) {
@@ -267,13 +267,13 @@ namespace algebra {
     }
 
     // Not-equal-to operator
-    template<typename T>
+    template <typename T>
     bool operator != (const matrix<T> &one, const matrix<T> &two) {
         return !(one == two);
     }
 
     // Output stream operator
-    template<typename T>
+    template <typename T>
     std::ostream &operator << (std::ostream &os, const matrix<T> &arg) {
         for (dimension_t i = 0; i < arg.numOfRows(); ++i) {
             os << "|";
@@ -286,7 +286,7 @@ namespace algebra {
     }
 
     // Input stream operator
-    template<typename T>
+    template <typename T>
     std::istream &operator >> (std::istream &is, const matrix<T> &arg) {
         for (dimension_t i = 0; i < arg.numOfRows(); ++i) {
             for (dimension_t j = 0; j < arg.numOfCols(); ++j) {
@@ -305,7 +305,7 @@ namespace algebra {
      *  determinant calculation
      */
 
-    template<class T>
+    template <class T>
     class sqr_matrix : public matrix<T>
     {
     protected:
@@ -328,17 +328,17 @@ namespace algebra {
     };
 
     // Operators
-    template<typename T> sqr_matrix<T> operator + (const sqr_matrix<T> &, const sqr_matrix<T> &);
-    template<typename T> sqr_matrix<T> operator - (const sqr_matrix<T> &, const sqr_matrix<T> &);
-    template<typename T> sqr_matrix<T> operator * (const sqr_matrix<T> &, const sqr_matrix<T> &);
-    template<typename T> sqr_matrix<T> operator * (T, const sqr_matrix<T> &);
-    template<typename T> sqr_matrix<T> operator * (const sqr_matrix<T> &, T);
+    template <typename T> sqr_matrix<T> operator + (const sqr_matrix<T> &, const sqr_matrix<T> &);
+    template <typename T> sqr_matrix<T> operator - (const sqr_matrix<T> &, const sqr_matrix<T> &);
+    template <typename T> sqr_matrix<T> operator * (const sqr_matrix<T> &, const sqr_matrix<T> &);
+    template <typename T> sqr_matrix<T> operator * (T, const sqr_matrix<T> &);
+    template <typename T> sqr_matrix<T> operator * (const sqr_matrix<T> &, T);
 
 
     // --- BLUEPRINTS ---
 
     // Explicit Constructor
-    template<typename T>
+    template <typename T>
     sqr_matrix<T>::sqr_matrix(dimension_t N, bool UNARY) : matrix<T>(N, N) {
         // If UNARY == true, a unary matrix (In) of dimension N is returned. Default value of UNARY evaluates to false
         if (UNARY) {
@@ -349,7 +349,7 @@ namespace algebra {
     }
 
     // Copy Constructor
-    template<typename T>
+    template <typename T>
     sqr_matrix<T>::sqr_matrix(const sqr_matrix<T> &prototype) : matrix<T>(prototype) {}
 
 
@@ -359,7 +359,7 @@ namespace algebra {
      *  the following algorithm strives for efficient exponentiation
      *  with O(log2(exp)) time complexity, where exp is the exponent
      */
-    template<typename T>
+    template <typename T>
     matrix<T> sqr_matrix<T>::pow(long long exp) const {
         if (exp <= 1) {
             if (exp <= 0)
@@ -416,7 +416,7 @@ namespace algebra {
     }
 
     // Function implementing PA = LU decomposition for the given Matrix
-    template<typename T>
+    template <typename T>
     void sqr_matrix<T>::decomposeLU(sqr_matrix<double> &L, sqr_matrix<double> &U) const {
         for (dimension_t j = 0; j < this->dimension(); j++) {
             for (dimension_t i = 0; i < this->dimension(); i++) {
@@ -447,7 +447,7 @@ namespace algebra {
     }
 
     // Returns the determinant of a square matrix
-    template<typename T>
+    template <typename T>
     double sqr_matrix<T>::determinant() const {
         sqr_matrix<double> L(this->dimension());
         sqr_matrix<double> U(this->dimension());
@@ -465,7 +465,7 @@ namespace algebra {
     // --- OPERATORS ---
 
     // Assignment operator
-    template<typename T>
+    template <typename T>
     sqr_matrix<T> &sqr_matrix<T>::operator=(const sqr_matrix<T> &arg) {
         if (this != &arg) {
             this->m_rows = arg.dimension();
@@ -484,7 +484,7 @@ namespace algebra {
     }
 
     // Times-equals operator with number
-    template<typename T>
+    template <typename T>
     sqr_matrix<T> &sqr_matrix<T>::operator*=(T factor) {
         dimension_t total = this->m_rows * this->m_columns;
         for (dimension_t i = 0; i < total; ++i) {
@@ -494,7 +494,7 @@ namespace algebra {
     }
 
     // Division-equals operator with number
-    template<typename T>
+    template <typename T>
     sqr_matrix<T> &sqr_matrix<T>::operator/=(T factor) {
         dimension_t total = this->m_rows * this->m_columns;
         for (dimension_t i = 0; i < total; ++i) {
@@ -504,7 +504,7 @@ namespace algebra {
     }
 
     // Addition operator -- two square matrices
-    template<typename T>
+    template <typename T>
     sqr_matrix<T> operator + (const sqr_matrix<T> &one, const sqr_matrix<T> &two) {
         if (one.dimension() != two.dimension()) {
             std::cerr << "Error: cannot add matrices with different dimensions" << std::endl;
@@ -521,7 +521,7 @@ namespace algebra {
     }
 
     // Subtraction operator -- two square matrices
-    template<typename T>
+    template <typename T>
     sqr_matrix<T> operator - (const sqr_matrix<T> &one, const sqr_matrix<T> &two) {
         if (one.dimension() != two.dimension()) {
             std::cerr << "Error: cannot subtract matrices with different dimensions" << std::endl;
@@ -538,7 +538,7 @@ namespace algebra {
     }
 
     // Multiplication operator -- two square matrices
-    template<typename T>
+    template <typename T>
     sqr_matrix<T> operator * (const sqr_matrix<T> &one, const sqr_matrix<T> &two) {
         if (one.dimension() != two.dimension()) {
             std::cerr << "Error: cannot multiply matrices\n"
@@ -561,14 +561,14 @@ namespace algebra {
     }
 
     // Multiplication operator with number
-    template<typename T>
+    template< typename T>
     sqr_matrix<T> operator * (T factor, const sqr_matrix<T> &arg) {
         sqr_matrix<T> prod(arg);
         prod *= factor;
         return prod;
     }
 
-    template<typename T>
+    template <typename T>
     sqr_matrix<T> operator * (const sqr_matrix<T> &arg, T factor) {
         return factor * arg;
     }
