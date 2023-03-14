@@ -1,3 +1,7 @@
+# FINAL UPDATE:
+The project is currently being implemented as a bachelor's thesis for university for a much larger scale. When the project is finished it will be posted in a new repository for public view and access later on. This repository is kept for legacy purposes.
+
+
 # Coppersmith-Winograd-Algorithm
 Trying to create a C interpretation for the Coppersmith-Winograd Algorithm, regarding NxN arrays. 
 
@@ -21,7 +25,7 @@ Final target complexity is O(~n^2.374), which is the current best known complexi
 &nbsp;&nbsp;&nbsp;
 After implementing lower and upper triangular arrays, the algorithm is able to perform a maximum of n=~25 before crashing. Further research into the topic is needed
 
-# **UPDATE 2**: 
+#### *UPDATE 2*: 
 &nbsp;&nbsp;&nbsp;
 Completed implementation of LU Decomposition and re-organised definition of variables. Current maximum amount of N is ~250, since above that, the number returned for the value of its determinant is higher than the value IEEE754 supports. As such, further implementation will regard time management and theory upon this maximum N and iterated a lot of times to get a distinguishable result on time measurement between different solution implementation (see clock_t and chrono). Current complexity reached is calculated at n^3 at worst.  
 &nbsp;&nbsp;&nbsp;
